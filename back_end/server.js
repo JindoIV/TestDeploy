@@ -63,7 +63,7 @@ app.use(passport.session());
 app.use(cors({
   // Cho phép truy cập từ cả localhost:3000 và IP cụ thể
   origin: '*',
-  credentials: true,
+  credentials: false,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
 }));
@@ -130,7 +130,7 @@ if (process.env.NODE_ENV !== 'production') {
       origin: '*',
       methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
-      credentials: true
+      credentials: false
     }
   });
 
