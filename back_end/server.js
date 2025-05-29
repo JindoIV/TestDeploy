@@ -62,10 +62,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors({
   // Cho phép truy cập từ cả localhost:3000 và IP cụ thể
-  origin: corsOrigins,
+  origin: '*',
   credentials: true,
-  methods: corsMethods,
-  allowedHeaders: corsHeaders
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
 }));
 
 app.use(bodyParser.json());
@@ -297,7 +297,8 @@ const PORT = process.env.PORT || 9999;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   db.connectDB();
-  schedulePayments(); // Nếu chỉ muốn chạy trong dev, bạn có thể wrap trong if (process.env.NODE_ENV !== 'production')
+  schedulePayments();
 });
+
 // Add this line for Vercel serverless deployment
 module.exports = server;
