@@ -292,14 +292,12 @@ if (process.env.NODE_ENV !== 'production') {
   db.connectDB();
 }
 
-server.listen(process.env.PORT || 9999, process.env.HOST_NAME || 'localhost', () => {
-  console.log(`Server is running at: http://${process.env.HOST_NAME || 'localhost'}:${process.env.PORT || 9999}`);
-  db.connectDB();
+const PORT = process.env.PORT || 9999;
 
-  // Optional: chỉ chạy script này trong dev nếu muốn
-  // if (process.env.NODE_ENV !== 'production') {
-    schedulePayments();
-  // }
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  db.connectDB();
+  schedulePayments(); // Nếu chỉ muốn chạy trong dev, bạn có thể wrap trong if (process.env.NODE_ENV !== 'production')
 });
 // Add this line for Vercel serverless deployment
 module.exports = server;
